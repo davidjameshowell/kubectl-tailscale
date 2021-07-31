@@ -36,8 +36,8 @@ mv "$HOME/tailscale_${tailscale_version}_amd64" ~/.tailscale
 echo "PATH=$PATH:$HOME/.tailscale" >> $GITHUB_ENV
 
 # Start Tailscale
-sudo $(which tailscaled) 2>~/.tailscale/tailscaled.log &
+$(which tailscaled) 2>~/.tailscale/tailscaled.log &
 sleep 3
-sudo $(which tailscale) up --authkey $tailscale_key --hostname "github-$(cat /etc/hostname)"
+$(which tailscale) up --authkey $tailscale_key --hostname "github-$(cat /etc/hostname)"
 
 sh -c "kubectl $command"
