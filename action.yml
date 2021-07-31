@@ -1,5 +1,5 @@
-name: 'kubectl-simple'
-description: 'The kubectl command line program as a GitHub Action'
+name: 'kubectl-simple-tailscale'
+description: 'The kubectl command line program as a GitHub Action via Tailscale'
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -7,6 +7,8 @@ runs:
     - ${{ inputs.version }}
     - ${{ inputs.config }}
     - ${{ inputs.command }}
+    - ${{ inputs.tailscale_version }}
+    - ${{ inputs.tailscale_key }}
 branding:
   icon: 'terminal'
   color: 'blue'
@@ -20,4 +22,11 @@ inputs:
     required: true
   command:
     description: 'kubectl command to run, without the kubectl, e.g. `get pods`'
+    required: true
+  tailscale_version:
+    description: 'Tailscale version to run'
+    required: true
+    default: 1.12.1
+  tailscale_key:
+    description: 'Tailscale ephemeral key'
     required: true
