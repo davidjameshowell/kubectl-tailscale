@@ -33,10 +33,12 @@ curl $URL -o tailscale.tgz
 tar -C ~ -xzf tailscale.tgz
 rm tailscale.tgz
 mv "$HOME/tailscale_${tailscale_version}_amd64" ~/.tailscale
+chmod +x ~/.tailscale/tailscaled
+chmod +x ~/.tailscale/tailscale
 
 # Start Tailscale
-~/.tailscaled 2>~/.tailscale/tailscaled.log &
+~/.tailscale/tailscaled 2>~/.tailscale/tailscaled.log &
 sleep 3
-~/.tailscale up --authkey $tailscale_key --hostname "github-actions-$(cat /etc/hostname)"
+~/.tailscale/tailscale up --authkey $tailscale_key --hostname "github-actions-$(cat /etc/hostname)"
 
 sh -c "kubectl $command"
